@@ -1,24 +1,54 @@
-import logo from './logo.svg';
 import './App.css';
+import React, {useState, useEffect} from 'react';
 
 function App() {
+  const [formData, setFormData] = useState({
+    text: "",
+    phoneNumber: ""
+  })
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  useEffect(() => {
+    fetch("/messages")
+    .then(r => r.json())
+    .then(res => console.log(res))
+  }, [])
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(formData)
+    fetch("/messages", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(formData)
+    })
+    .then(r => r.json()).then(res => console.log(res, "eh"))
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div style={{display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "1000px"}}>
+        <div style={{backgroundColor: "white", width: "400px", height: "400px"}}>
+          <form type="submit" onSubmit={handleSubmit}>
+            <div style={{display: "flex", justifyContent: "center", marginTop: "30px"}}>
+              <input name="text" onChange={handleChange} placeholder="message" style={{height: "30px", width: "80%", padding: "10px"}}/>
+            </div>
+            <div style={{display: "flex", justifyContent: "center", marginTop: "30px"}}>
+              <input name="phoneNumber" onChange={handleChange} placeholder="number" style={{height: "30px", width: "80%", padding: "10px"}}/>
+            </div>
+            <div style={{display: "flex", justifyContent: "center", marginTop: "30px"}}>
+              <button style={{height: "50px", width: "80px"}}>Send</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </>
   );
 }
 
