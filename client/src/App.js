@@ -8,10 +8,17 @@ function App() {
   })
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    })
+    if (e.target.name === "phoneNumber") {
+      setFormData({
+        ...formData,
+        [e.target.name]: "1" + e.target.value
+      })
+    } else {
+      setFormData({
+        ...formData,
+        [e.target.name]: e.target.value
+      })
+    }
   }
 
   useEffect(() => {
@@ -22,7 +29,7 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(formData)
+    // console.log(formData)
     fetch("/messages", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
