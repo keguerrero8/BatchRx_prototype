@@ -1,20 +1,19 @@
-# require 'twilio-ruby'
 require './config/environment'
 
-class MessagesController < ApplicationController
+class RequestsController < ApplicationController
     rescue_from ActiveRecord::RecordInvalid, with: :render_invalid
 
     def index
-        messages = Message.all
-        render json: messages, status: :ok
+        requests = Request.all
+        render json: requests, status: :ok
     end
 
     def create
         boot_twilio
         @client.messages.create(
-            from: Rails.application.credentials.twilio_number, 
-            to: message_params["phoneNumber"],
-            body: message_params["text"]
+            messaging_service_sid: "MG0763d62b439311bc987e3302129f9dad", 
+            to: request_params["phone_number"],
+            body: "Hello there, you requested #{request_params["med_name"]}"
         )
         render json: {message: "success"}
     end
@@ -38,8 +37,8 @@ class MessagesController < ApplicationController
         @client = Twilio::REST::Client.new(account_sid, auth_token) 
     end
 
-    def message_params
-        params.permit(:phoneNumber, :text)
+    def request_params
+        params.permit(:phone_number, :med_name)
     end
 
     def render_invalid
@@ -47,4 +46,4 @@ class MessagesController < ApplicationController
     end
 end
 
-#in order to send sms to another phone number they need to be verified first
+        

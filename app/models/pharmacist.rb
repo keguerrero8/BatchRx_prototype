@@ -1,0 +1,2 @@
+class Pharmacist < ApplicationRecord
+end
