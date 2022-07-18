@@ -39,8 +39,9 @@ export default function HomePage() {
     
       return (
         <>
-          <div style={{display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "1000px"}}>
-            <div style={{backgroundColor: "white", width: "400px", height: "400px"}}>
+          <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", width: "100%", height: "100vh"}}>
+            <h1 style={{color: "wheat"}}>HOME PAGE</h1>
+            <div style={{backgroundColor: "wheat", width: "400px", height: "400px"}}>
               <form type="submit" onSubmit={handleSubmit}>
                 <div style={{display: "flex", justifyContent: "center", marginTop: "30px"}}>
                   <input name="med_name" onChange={handleChange} placeholder="message to send" style={{height: "30px", width: "80%", padding: "10px"}}/>
