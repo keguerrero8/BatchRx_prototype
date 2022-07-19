@@ -1,11 +1,16 @@
 class PharmaciesController < ApplicationController
+    before_action :require_admin_authorization
 
     def index
+        render json: Pharmacy.includes(:pharmacists).all
+    end
+
+    private
+
+    def require_admin_authorization
         user = User.find_by(id: session[:user_id])
-        if user
-            render json: Pharmacy.includes(:pharmacists).all
-        else
-            render json: {errors: ["No user logged in"]}, status: :unauthorized
+        unless user
+            render json: {errors: ["No admin logged in"]}, status: :unauthorized
         end
     end
 

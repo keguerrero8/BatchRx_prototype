@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
 
 import BasicModal from './BasicModal';
+import PharmacistRow from './PharmacistRow';
 
 import { Box, Collapse, IconButton, Table, TableBody, TableCell, TableHead, TableRow, Typography } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
-export default function Row(props) {
-    const { row } = props;
+export default function PharmacyRow({ row, setIsUpdate, isUpdate }) {
     const [open, setOpen] = useState(false);
-  
+
     return (
       <>
         <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
@@ -35,7 +35,7 @@ export default function Row(props) {
                     <Typography variant="h6" gutterBottom component="div">
                     Pharmacists Enrolled
                     </Typography>
-                    <BasicModal pharmacyId={row.id}/>
+                    <BasicModal pharmacyId={row.id} isUpdate={isUpdate} setIsUpdate={setIsUpdate}/>
                 </Box>
                 <Table size="small">
                   <TableHead>
@@ -47,14 +47,7 @@ export default function Row(props) {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {row.pharmacists.map((p) => (
-                      <TableRow key={p.id}>
-                        <TableCell align="center">{p.name}</TableCell>
-                        <TableCell align="center">{p.phone_number}</TableCell>
-                        <TableCell align="center">checkbox</TableCell>
-                        <TableCell align="center">Delete</TableCell>
-                      </TableRow>
-                    ))}
+                    {row.pharmacists.map((p) => <PharmacistRow key={p.id} pharmacist={p} setIsUpdate={setIsUpdate} isUpdate={isUpdate}/> )}
                   </TableBody>
                 </Table>
               </Box>

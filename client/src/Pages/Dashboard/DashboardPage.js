@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react'
 
-import Row from '../../Components/Row';
+import PharmacyRow from '../../Components/PharmacyRow';
 
 import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material'
   
 export default function CollapsibleTable() {
     const [pharmacies, setPharmacies] = useState([])
+    const [isUpdate, setIsUpdate] = useState(false)
 
     useEffect(() => {
         fetch("/pharmacies")
         .then(r => r.json())
         .then(res => setPharmacies(res))
-    }, [])
+    }, [isUpdate])
 
     console.log(pharmacies)
 
@@ -30,7 +31,7 @@ return (
                 </TableHead>
                 <TableBody>
                     {pharmacies.map((pharmacy) => (
-                    <Row key={pharmacy.id} row={pharmacy} />
+                    <PharmacyRow key={pharmacy.id} row={pharmacy} setIsUpdate={setIsUpdate} isUpdate={isUpdate}/>
                     ))}
                 </TableBody>
             </Table>
