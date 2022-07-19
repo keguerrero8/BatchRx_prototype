@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
   
-  resources :pharmacists
+  resources :pharmacists, only: [:create, :destroy]
   resources :pharmacies, only: [:index]
-  # resources :users, only: [:show]
   resources :requests, only: [:index, :create]
 
   post "reply", to: "requests#sms"
