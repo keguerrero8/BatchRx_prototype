@@ -2,7 +2,8 @@ class PharmaciesController < ApplicationController
     before_action :require_admin_authorization
 
     def index
-        render json: Pharmacy.includes(:pharmacists).all
+        # render json: Pharmacy.includes(:pharmacists).all
+        render json: Pharmacy.all
     end
 
     private

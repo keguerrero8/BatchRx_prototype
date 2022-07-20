@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  resources :pharmacists, only: [:create, :destroy]
+  resources :pharmacists, only: [:show, :create, :update, :destroy]
   resources :pharmacies, only: [:index]
   resources :requests, only: [:index, :create]
 

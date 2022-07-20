@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import BasicModal from './BasicModal';
 import PharmacistRow from './PharmacistRow';
@@ -7,8 +7,21 @@ import { Box, Collapse, IconButton, Table, TableBody, TableCell, TableHead, Tabl
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 
-export default function PharmacyRow({ row, setIsUpdate, isUpdate }) {
+export default function PharmacyRow({ row }) {
     const [open, setOpen] = useState(false);
+    const [pharmUpdate, setPharmUpdate] = useState(false)
+    const [pharmacists, setPharmacists] = useState([])
+
+    const { id, name, address, zip_code, phone_number } = row
+
+    useEffect(() => {
+      fetch(`/pharmacists/${id}`)
+      .then(r => {
+        if (r.ok) {
+          r.json().then(res => setPharmacists(res))
+        }       
+      })
+    }, [open, pharmUpdate, id])
 
     return (
       <>
@@ -22,10 +35,10 @@ export default function PharmacyRow({ row, setIsUpdate, isUpdate }) {
               {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
             </IconButton>
           </TableCell>
-          <TableCell align="center">{row.name}</TableCell>
-          <TableCell align="center">{row.address}</TableCell>
-          <TableCell align="center">{row.zip_code}</TableCell>
-          <TableCell align="center">{row.phone_number}</TableCell>
+          <TableCell align="center">{name}</TableCell>
+          <TableCell align="center">{address}</TableCell>
+          <TableCell align="center">{zip_code}</TableCell>
+          <TableCell align="center">{phone_number}</TableCell>
         </TableRow>
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -35,7 +48,7 @@ export default function PharmacyRow({ row, setIsUpdate, isUpdate }) {
                     <Typography variant="h6" gutterBottom component="div">
                     Pharmacists Enrolled
                     </Typography>
-                    <BasicModal pharmacyId={row.id} isUpdate={isUpdate} setIsUpdate={setIsUpdate}/>
+                    <BasicModal pharmacyId={id} setPharmUpdate={setPharmUpdate} pharmUpdate={pharmUpdate}/>
                 </Box>
                 <Table size="small">
                   <TableHead>
@@ -47,7 +60,7 @@ export default function PharmacyRow({ row, setIsUpdate, isUpdate }) {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {row.pharmacists.map((p) => <PharmacistRow key={p.id} pharmacist={p} setIsUpdate={setIsUpdate} isUpdate={isUpdate}/> )}
+                    {pharmacists.map((p) => <PharmacistRow key={p.id} pharmacist={p} setPharmUpdate={setPharmUpdate} pharmUpdate={pharmUpdate}/> )}
                   </TableBody>
                 </Table>
               </Box>

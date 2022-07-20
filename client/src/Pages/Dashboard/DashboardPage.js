@@ -6,15 +6,15 @@ import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, 
   
 export default function CollapsibleTable() {
     const [pharmacies, setPharmacies] = useState([])
-    const [isUpdate, setIsUpdate] = useState(false)
+    // const [isUpdate, setIsUpdate] = useState(false)
 
     useEffect(() => {
         fetch("/pharmacies")
         .then(r => r.json())
         .then(res => setPharmacies(res))
-    }, [isUpdate])
+    }, [])
 
-    console.log(pharmacies)
+    // console.log(pharmacies)
 
 return (
     <Box sx={{width: "90%", margin: "50px auto"}}>
@@ -31,7 +31,7 @@ return (
                 </TableHead>
                 <TableBody>
                     {pharmacies.map((pharmacy) => (
-                    <PharmacyRow key={pharmacy.id} row={pharmacy} setIsUpdate={setIsUpdate} isUpdate={isUpdate}/>
+                    <PharmacyRow key={pharmacy.id} row={pharmacy} />
                     ))}
                 </TableBody>
             </Table>

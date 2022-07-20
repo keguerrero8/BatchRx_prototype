@@ -1,3 +1,3 @@
 class PharmacistSerializer < ActiveModel::Serializer
-  attributes :id, :name, :phone_number, :email
+  attributes :id, :name, :phone_number, :email, :isEnrolled
 end
