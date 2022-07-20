@@ -18,7 +18,7 @@ const style = {
   gap: "1rem"
 };
 
-export default function BasicModal({ pharmacyId, pharmUpdate, setPharmUpdate }) {
+export default function BasicModal({ pharmacyId, pharmacistsUpdate, setPharmacistsUpdate }) {
   const [open, setOpen] = useState(false);
   const [pharmacistData, setPharmacistData] = useState({name: "", phone_number: "", pharmacy_id: pharmacyId, isEnrolled: false})
 
@@ -35,7 +35,7 @@ export default function BasicModal({ pharmacyId, pharmUpdate, setPharmUpdate }) 
     })
     .then(r => {
       if (r.ok) {
-        r.json().then(res => setPharmUpdate(!pharmUpdate))
+        r.json().then(res => setPharmacistsUpdate(!pharmacistsUpdate))
       }
       else {
         r.json().then(res => console.log(res))

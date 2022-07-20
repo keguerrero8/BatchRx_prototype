@@ -6,6 +6,11 @@ class PharmaciesController < ApplicationController
         render json: Pharmacy.all
     end
 
+    def show
+        pharmacy = Pharmacy.find_by(id: params[:id])
+        render json: pharmacy.pharmacists, status: :ok
+    end
+
     private
 
     def require_admin_authorization

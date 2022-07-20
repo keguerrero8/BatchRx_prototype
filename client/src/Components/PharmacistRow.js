@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { IconButton, TableCell, TableRow, Checkbox } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-export default function PharmacistRow({ pharmacist, pharmUpdate, setPharmUpdate }) {
+export default function PharmacistRow({ pharmacist, pharmacistsUpdate, setPharmacistsUpdate }) {
     const { name, phone_number, id, isEnrolled } = pharmacist
     const [checked, setChecked] = useState(isEnrolled)
 
@@ -27,7 +27,7 @@ export default function PharmacistRow({ pharmacist, pharmUpdate, setPharmUpdate 
         })
         .then(r => {
             if (r.ok) {
-                setPharmUpdate(!pharmUpdate)
+                setPharmacistsUpdate(!pharmacistsUpdate)
             }
             else {
                 r.json().then(res => console.log(res))
