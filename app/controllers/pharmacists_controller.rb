@@ -2,6 +2,11 @@ class PharmacistsController < ApplicationController
     rescue_from ActiveRecord::RecordInvalid, with: :render_invalid
     before_action :require_admin_authorization
 
+    def show
+        pharmacy = Pharmacy.find_by(id: params[:id])
+        render json: pharmacy.pharmacists
+    end
+
     def create
         pharmacy = Pharmacy.find_by(id: params[:pharmacy_id])
         pharmacist = pharmacy.pharmacists.create!(pharmacist_params)

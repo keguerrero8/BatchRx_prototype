@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
+import { Box, TextField, Button, Typography } from '@mui/material';
+
 export default function LoginPage({setUser}) {
     const history = useNavigate()
     const [formData, setFormData] = useState({
@@ -35,26 +37,16 @@ export default function LoginPage({setUser}) {
             [e.target.name] : e.target.value
         })
     }
-    
+    // #4eb59c
   return (
-    <div style={{height: "100vh", display: "flex", justifyContent: "center", alignItems: "center"}}>
-        <div style={{backgroundColor: "wheat", height: "400px", width: "400px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center"}}>
-            <h1 style={{fontSize: "1.5rem"}}>Welcome, Please Sign In</h1>
-            <form style={{width: "70%"}} type="submit" onSubmit={handleSubmit}>
-                <div style={{display: "flex", justifyContent: "center", margin: "10px 0"}}>
-                    <input name="username" value={formData.username} placeholder="Username" onChange={handleChange} style={{borderRadius: "10px", borderColor: "black", width: "100%", height: "30px", padding: "5px 10px"}}/>
-                </div>
-                <div style={{display: "flex", justifyContent: "center", margin: "10px 0"}}>
-                    <input name="password" value={formData.password} placeholder="Password" onChange={handleChange} style={{borderRadius: "10px", borderColor: "black", width: "100%", height: "30px", padding: "5px 10px"}}/>
-                </div>
-                <div style={{display: "flex", justifyContent: "center", margin: "10px 0"}}>
-                    <input name="password_confirmation" value={formData.password_confirmation} placeholder="Password Confirmation" onChange={handleChange} style={{borderRadius: "10px", borderColor: "black", width: "100%", height: "30px", padding: "5px 10px"}}/>
-                </div>
-                <div style={{display: "flex", justifyContent: "center", margin: "30px 0px"}}>
-                  <button style={{height: "35px", width: "70px", borderRadius: "10px", borderColor: "black", cursor: "pointer"}}>Log in</button>
-                </div>
-            </form>
-        </div>
-    </div>
+    <Box sx={{width: "100%", height: "100vh", display: "flex", alignItems: "center", justifyContent: "center"}}>
+        <Box component="form" onSubmit={handleSubmit} sx={{border: "solid white", borderRadius: "20px", minWidth: "500px", height: "500px", backgroundColor: "white", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", gap: "2rem"}}>
+            <Typography component="div" variant="h5" color="#4eb59c" fontSize="2.3rem">Admin Sign In</Typography>
+            <TextField focused name="username" required onChange={handleChange} value={formData.username} label="Username" variant="outlined" sx={{width: "60%", color: "whitesmoke"}}/>
+            <TextField focused type="password" name="password" required onChange={handleChange} value={formData.password} label="Password" variant="outlined" sx={{width: "60%"}}/>
+            <TextField focused type="password" name="password_confirmation" required onChange={handleChange} value={formData.password_confirmation} label="Password Confirmation" variant="outlined" sx={{width: "60%"}}/>
+            <Button type="submit" variant="outlined" >Sign In</Button>
+        </Box>
+    </Box>
   )
 }

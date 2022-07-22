@@ -8,7 +8,7 @@ class PharmaciesController < ApplicationController
 
     def show
         pharmacy = Pharmacy.find_by(id: params[:id])
-        render json: pharmacy.pharmacists, status: :ok
+        render json: pharmacy
     end
 
     private

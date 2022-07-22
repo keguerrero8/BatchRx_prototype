@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { TextField, InputAdornment, Box, IconButton } from '@mui/material'
+import { TextField, InputAdornment, Box } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 
 export default function SearchBar({ search, setSearch }) {
@@ -15,9 +15,7 @@ export default function SearchBar({ search, setSearch }) {
           InputProps={{
             startAdornment: 
                 <InputAdornment position="start">
-                    <IconButton>
-                        <SearchIcon />
-                    </IconButton>
+                    <SearchIcon />
                 </InputAdornment>,
           }}
         />
