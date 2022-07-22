@@ -45,7 +45,7 @@ export default function BasicModal({ pharmacyId, pharmacistsUpdate, setPharmacis
 
   return (
     <>
-      <Button onClick={handleOpen} variant="outlined" size="small">Add Pharmacist</Button>
+      <Button onClick={handleOpen} variant="contained" size="medium" sx={{color: "white"}}>Add Pharmacist</Button>
       <Modal
         open={open}
         onClose={handleClose}

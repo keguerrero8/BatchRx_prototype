@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import RequestForm from '../../Components/RequestForm';
 
 export default function HomePage() {
     const [formData, setFormData] = useState({
@@ -39,7 +40,7 @@ export default function HomePage() {
     
       return (
         <>
-          <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", width: "100%", height: "100vh"}}>
+          {/* <div style={{display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", width: "100%", height: "100vh"}}>
             <h1 style={{color: "wheat"}}>HOME PAGE</h1>
             <div style={{backgroundColor: "wheat", width: "400px", height: "400px"}}>
               <form type="submit" onSubmit={handleSubmit}>
@@ -54,7 +55,8 @@ export default function HomePage() {
                 </div>
               </form>
             </div>
-          </div>
+          </div> */}
+          <RequestForm />
         </>
       );
 }
